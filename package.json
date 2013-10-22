@@ -1,0 +1,19 @@
+{
+  "name": "mongo-queryfilter",
+  "version": "0.0.1",
+  "description": "Safely create a simple mongo query from a querystring collection to allow filtering",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "https://github.com/dhendo/mongo-queryfilter",
+  "author": "David Henderson",
+  "license": "MIT",
+  "dependencies": {
+    "qs": "~0.6.5"
+  },
+  "devDependencies": {
+    "mocha": "~1.13.0",
+    "should": "~1.3.0"
+  }
+}
