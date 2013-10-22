@@ -1,7 +1,7 @@
 mongo-queryfilter
 =================
 
-Generate an object suitable for use as a a mongo query from a querystring or request object.
+Generate an object suitable for use as a mongo query from a querystring or request object.
 
 The filter function takes either a node http request object or a string containing the "query" portion of the request (e.g. "param=foo&param2=bar"). Numeric values will be cast as appropriate.
 
