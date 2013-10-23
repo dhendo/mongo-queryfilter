@@ -2,20 +2,35 @@ var qs = require('qs');
 var helpers = require('./lib/helpers');
 
 function processQuerystringItem(key, value) {
-    value = helpers.replace_operator_values(value);
-    if(value !== null) {
-        filterQuery[key] = value;
+    var result;
+    if(require("util").isArray(value)) {
+        var processedValues = [];
+        for(var i = 0; i < value.length; i++) {
+            var subValue = helpers.replace_operator_values(value[i]);
+            if(subValue) {
+                result = {};
+                result[key] = subValue;
+                processedValues.push(result);
+            }
+        }
+        return processedValues;
+    } else {
+        value = helpers.replace_operator_values(value);
+        if(value !== null) {
+            result = {};
+            result[key] = value;
+            return [result];
+        }
     }
+    return [];
 }
-
-var filterQuery = {};
 
 module.exports = {
     filter: function (request, options) {
+        var filterQuery = {};
         options = options || {};
         var prefix = options.prefix;
         var querystring;
-        filterQuery = {};
         if(typeof request === 'string') {
             querystring = request;
         } else if(typeof request === 'object' && request.url && request.url.query) {
@@ -26,16 +41,30 @@ module.exports = {
 
         var qsParts = qs.parse(querystring);
 
+        var conditions = [];
+        var condition;
         for(var key in qsParts) {
+
             if(qsParts.hasOwnProperty(key)) {
                 // If there's a prefix defined, only pass through keys that start with the prefix
                 if(options.prefix) {
                     if(!key.indexOf(options.prefix)) {
-                        processQuerystringItem(key.substr(prefix.length), qsParts[key]);
+                        conditions = conditions.concat(processQuerystringItem(key.substr(prefix.length), qsParts[key]));
                     }
                 } else {
-                    processQuerystringItem(key, qsParts[key]);
+                    conditions = conditions.concat(processQuerystringItem(key, qsParts[key]));
                 }
+            }
+
+            // Now build the final object
+            switch(conditions.length) {
+                case 1:
+                    filterQuery = conditions[0];
+                    break;
+                case 0:
+                    break;
+                default:
+                    filterQuery.$and = conditions;
             }
         }
         return filterQuery;

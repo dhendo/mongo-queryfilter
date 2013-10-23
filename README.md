@@ -77,6 +77,20 @@ Output:
 {value: {$or: ['alice', 'bob']}}
 ```
 
+### Multiple Conditions
+
+You can apply multiple conditions to the same key to create ranges:
+
+```javascript
+var querystring = 'value=__gt_1&value=__lt_10';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+{$and: [{value: {$gt: 1}},{value: {$lt: 10}}]}
+```
+
+
 
 
 
