@@ -55,6 +55,7 @@ module.exports = {
                     conditions = conditions.concat(processQuerystringItem(key, qsParts[key]));
                 }
             }
+        }
 
             // Now build the final object
             switch(conditions.length) {
@@ -66,7 +67,7 @@ module.exports = {
                 default:
                     filterQuery.$and = conditions;
             }
-        }
+
         return filterQuery;
     }
 };
