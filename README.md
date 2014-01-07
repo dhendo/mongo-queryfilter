@@ -102,7 +102,7 @@ Output:
 ### Define new operators
 ```javascript
 // define a function that returns an operator $thing, that doubles the value
-var thingfn = function(value, helpers){
+var thingfn = function(value, helpers, operatorName){
     return value * 2;
 };
 

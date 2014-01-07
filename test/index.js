@@ -174,7 +174,7 @@ suite('The filter', function () {
     test('should allow a new operator to be defined', function (done) {
 
         // define a function that returns an operator $thing, that doubles the value
-        var thingfn = function(value, helpers){
+        var thingfn = function(value, helpers, operatorName){
             return value * 2;  // You can call helpers.replace_operator_values to recursively generate fragments.
         };
 
@@ -192,7 +192,7 @@ suite('The filter', function () {
     test('should allow a new operator to be defined beforehand', function (done) {
 
         // define a function that returns an operator $thing, that doubles the value
-        var thingfn = function(value, helpers){
+        var thingfn = function(value, helpers, operatorName){
             return value * 2;
         };
         // Set for the lifetime of qf

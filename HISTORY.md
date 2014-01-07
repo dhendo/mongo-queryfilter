@@ -1,6 +1,10 @@
 History
 =======
 
+####2014-01-07 v0.0.5
+
+Pass the operator through to custom filters
+
 ####2014-01-07 v0.0.4
 
 Added the ability to generate an elemMatch
