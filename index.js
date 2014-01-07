@@ -26,10 +26,20 @@ function processQuerystringItem(key, value) {
 }
 
 module.exports = {
+
+    extendOperators: function(operators){
+        helpers.extendOperators(operators);
+    },
+
     filter: function (request, options) {
         var filterQuery = {};
         options = options || {};
         var prefix = options.prefix;
+
+        if(options.operators){
+            helpers.extendOperators(options.operators);
+        }
+
         var querystring;
         if(typeof request === 'string') {
             querystring = request;

@@ -1,6 +1,11 @@
 History
 =======
 
+####2014-01-07 v0.0.4
+
+Added the ability to generate an elemMatch
+Added the ability to inject operators. This allows for more complicated expansions / aliases / calculations.
+
 ####2013-10-24 v0.0.3
 
 Added fix for dotted notation.

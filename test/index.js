@@ -8,6 +8,7 @@ suite('The filter', function () {
     });
 
     setup(function (done) {
+        qf.extendOperators(null);
         done();
     });
 
@@ -42,6 +43,32 @@ suite('The filter', function () {
         out.value.should.have.property('$in');
         out.value.$in.should.include('alice');
         out.value.$in.should.include('bob');
+        done();
+    });
+
+
+    test('should generate for an elemMatch', function (done) {
+        var out = qf.filter({url: {query: {array: "__elemMatch_alice__eq_a,bob__gt_1"}}});
+        should.exist(out);
+        out.should.have.property('array');
+        out.array.should.have.property('$elemMatch');
+        out.array.$elemMatch.should.have.property("alice", "a")
+        out.array.$elemMatch.should.have.property('bob');
+        out.array.$elemMatch.bob.should.have.property('$gt', 1);
+        done();
+    });
+
+    test('should generate for an elemMatch with an in', function (done) {
+        var out = qf.filter({url: {query: {cat: "__elemMatch_id__in_a||b,bob__gt_1"}}});
+        should.exist(out);
+        out.should.have.property('cat');
+        out.cat.should.have.property('$elemMatch');
+        out.cat.$elemMatch.should.have.property("id");
+        out.cat.$elemMatch.id.should.have.property("$in");
+        out.cat.$elemMatch.id.$in.should.include("a");
+        out.cat.$elemMatch.id.$in.should.include("b");
+        out.cat.$elemMatch.should.have.property('bob');
+        out.cat.$elemMatch.bob.should.have.property('$gt', 1);
         done();
     });
 
@@ -141,6 +168,42 @@ suite('The filter', function () {
         out.$and[0].should.have.property("extra.color", "red");
         out.$and[1].should.have.property('price');
         out.$and[1].price.should.have.property('$gt', 2);
+        done();
+    });
+
+    test('should allow a new operator to be defined', function (done) {
+
+        // define a function that returns an operator $thing, that doubles the value
+        var thingfn = function(value, helpers){
+            return value * 2;  // You can call helpers.replace_operator_values to recursively generate fragments.
+        };
+
+        var out = qf.filter('extra.color=red&price=__thing_2', {operators: {'thing': {'fn': thingfn, 'ns': '$thing'}}});
+        should.exist(out);
+        out.should.have.property('$and');
+        out.$and.should.have.length(2);
+        out.$and[0].should.have.property("extra.color", "red");
+        out.$and[1].should.have.property('price');
+        out.$and[1].price.should.have.property('$thing', 4);
+        done();
+    });
+
+
+    test('should allow a new operator to be defined beforehand', function (done) {
+
+        // define a function that returns an operator $thing, that doubles the value
+        var thingfn = function(value, helpers){
+            return value * 2;
+        };
+        // Set for the lifetime of qf
+        qf.extendOperators({'thing': {'fn': thingfn, 'ns': '$thing'}});
+        var out = qf.filter('extra.color=red&price=__thing_2');
+        should.exist(out);
+        out.should.have.property('$and');
+        out.$and.should.have.length(2);
+        out.$and[0].should.have.property("extra.color", "red");
+        out.$and[1].should.have.property('price');
+        out.$and[1].price.should.have.property('$thing', 4);
         done();
     });
 });

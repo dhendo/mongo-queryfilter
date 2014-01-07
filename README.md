@@ -77,6 +77,44 @@ Output:
 {value: {$or: ['alice', 'bob']}}
 ```
 
+
+### ElemMatch
+```javascript
+var querystring = 'array="__elemMatch_alice__eq_a,bob__gt_1';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+{array: {$elemMatch: {alice: 'a', bob: {$gt: 1}]}}
+```
+
+### ElemMatch with $in
+```javascript
+var querystring = 'array="__elemMatch_id__in_a||b,bob__gt_1';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+{array: {$elemMatch: {id: {$in: ['a', 'b']}, bob: {$gt: 1}]}}
+```
+
+
+### Define new operators
+```javascript
+// define a function that returns an operator $thing, that doubles the value
+var thingfn = function(value, helpers){
+    return value * 2;
+};
+
+var result = require('mongo-queryfilter').filter('extra.color=red&price=__thing_2', {operators: {'thing': {'fn': thingfn, 'ns': '$thing'}}});
+```
+Output:
+```javascript
+{"extra.color": "red", price: {$thing: 4}]}}
+
+// Note that $thing isn't valid in mongo, just an example - this will allow you to inject more complicated operators
+```
+
 ### Multiple Conditions
 
 You can apply multiple conditions to the same key to create ranges:
