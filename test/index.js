@@ -47,6 +47,17 @@ suite('The filter', function () {
     });
 
 
+    test('should generate for an nin', function (done) {
+        var out = qf.filter({url: {query: {value: "__nin_alice||bob"}}});
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$nin');
+        out.value.$nin.should.include('alice');
+        out.value.$nin.should.include('bob');
+        done();
+    });
+
+
     test('should generate for an elemMatch', function (done) {
         var out = qf.filter({url: {query: {array: "__elemMatch_alice__eq_a,bob__gt_1"}}});
         should.exist(out);
