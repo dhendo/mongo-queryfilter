@@ -1,6 +1,10 @@
 History
 =======
 
+####2014-02-19 v0.0.6
+
+Add nin operator (MikeTheTechie)
+
 ####2014-01-07 v0.0.5
 
 Pass the operator through to custom filters
