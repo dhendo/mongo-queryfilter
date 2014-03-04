@@ -145,7 +145,7 @@ You can filter based on both relative and absolute dates.
 There are the following date comparisons: dtgt,dtlt,dtgte,dtlte, dteq.
 You can pass an absolute value in ISO8601 format (e.g. 2014-01-01) or as a timestamp (1388534400000)
 
-Alternatively, you can pass a relative value e.g. "-2days" "4weeks", "1year"
+Alternatively, you can pass a relative value e.g. "now" "5minutes" "1hour" "-2days" "4weeks", "1year"
 
 ```javascript
 var querystring = 'value=__dtlte_2weeks';

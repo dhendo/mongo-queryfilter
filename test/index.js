@@ -432,8 +432,14 @@ suite('Date filtering', function () {
           (out.value.$lte*1).should.be.approximately(new Date()*1 + (1000*60*60*24*14), 1000);
           done();
       });
-
-
+    test('should generate for a dtlte relative now', function (done) {
+          var out = qf.filter('value=__dtlte_now');
+          should.exist(out);
+          out.should.have.property('value');
+          out.value.should.have.property('$lte');
+          (out.value.$lte*1).should.be.approximately(new Date()*1, 1000);
+          done();
+      });
 });
 
 suite('The filter values', function () {
