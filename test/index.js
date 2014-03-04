@@ -122,6 +122,53 @@ suite('The filter', function () {
         done();
     });
 
+    test('should generate for an exists true', function (done) {
+        var out = qf.filter('value=__exists_true');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$exists', true);
+        done();
+    });
+    test('should generate for an exists', function (done) {
+        var out = qf.filter('value=__exists_false');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$exists', false);
+        done();
+    });
+
+    test('should generate for an exists 0', function (done) {
+        var out = qf.filter('value=__exists_0');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$exists', false);
+        done();
+    });
+
+    test('should generate for an exists 1', function (done) {
+        var out = qf.filter('value=__exists_1');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$exists', true);
+        done();
+    });
+
+    test('should generate for an exists yes', function (done) {
+        var out = qf.filter('value=__exists_yes');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$exists', true);
+        done();
+    });
+
+    test('should generate for an exists no', function (done) {
+        var out = qf.filter('value=__exists_no');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$exists', false);
+        done();
+    });
+
     test('should not filter for an empty value', function (done) {
         var out = qf.filter('value=');
         should.exist(out);
@@ -182,6 +229,17 @@ suite('The filter', function () {
         done();
     });
 
+    test('should generate for a dotted value with an underscore', function (done) {
+        var out = qf.filter('extra.color_name=red&price=__gt_2');
+        should.exist(out);
+        out.should.have.property('$and');
+        out.$and.should.have.length(2);
+        out.$and[0].should.have.property("extra.color_name", "red");
+        out.$and[1].should.have.property('price');
+        out.$and[1].price.should.have.property('$gt', 2);
+        done();
+    });
+
     test('should allow a new operator to be defined', function (done) {
 
         // define a function that returns an operator $thing, that doubles the value
@@ -234,6 +292,148 @@ suite('Prefixing', function () {
         out.should.have.property('val2', 7);
         done();
     });
+});
+
+suite('Date filtering', function () {
+    suiteSetup(function (done) {
+        done();
+    });
+
+    setup(function (done) {
+        done();
+    });
+
+    test('should generate for a dtlte', function (done) {
+        var out = qf.filter('value=__dtlte_2014-01-01');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$lte');
+        (out.value.$lte*1).should.equal(new Date("2014-01-01") *1);
+        done();
+    });
+    test('should generate for a dtgte', function (done) {
+        var out = qf.filter('value=__dtgte_2014-01-01');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$gte');
+        (out.value.$gte*1).should.equal(new Date("2014-01-01") *1);
+        done();
+    });
+
+    test('should generate for a dtgt', function (done) {
+        var out = qf.filter('value=__dtgt_2014-01-01');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$gt');
+        (out.value.$gt*1).should.equal(new Date("2014-01-01") *1);
+        done();
+    });
+
+    test('should generate for a dtlt', function (done) {
+        var out = qf.filter('value=__dtlt_2014-01-01');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$lt');
+        (out.value.$lt*1).should.equal(new Date("2014-01-01") *1);
+        done();
+    });
+
+    test('should generate for a dteq', function (done) {
+        var out = qf.filter('value=__dteq_2014-01-01');
+        should.exist(out);
+        (out.value*1).should.equal(new Date("2014-01-01") *1);
+        done();
+    });
+
+
+
+    /*
+        Allow epoch timestamps
+     */
+
+    test('should generate for a dtlte epoch', function (done) {
+        var out = qf.filter('value=__dtlte_1388534400000');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$lte');
+        (out.value.$lte*1).should.equal(new Date("2014-01-01") *1);
+        done();
+    });
+    test('should generate for a dtgte epoch', function (done) {
+        var out = qf.filter('value=__dtgte_1388534400000');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$gte');
+        (out.value.$gte*1).should.equal(new Date("2014-01-01") *1);
+        done();
+    });
+
+    test('should generate for a dtgt epoch', function (done) {
+        var out = qf.filter('value=__dtgt_1388534400000');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$gt');
+        (out.value.$gt*1).should.equal(new Date("2014-01-01") *1);
+        done();
+    });
+
+    test('should generate for a dtlt epoch', function (done) {
+        var out = qf.filter('value=__dtlt_1388534400000');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$lt');
+        (out.value.$lt*1).should.equal(new Date("2014-01-01") *1);
+        done();
+    });
+
+    test('should generate for a dteq epoch', function (done) {
+        var out = qf.filter('value=__dteq_1388534400000');
+        should.exist(out);
+        (out.value*1).should.equal(new Date("2014-01-01") *1);
+        done();
+    });
+
+
+
+
+    /*
+        Work with relative date times
+     */
+
+    test('should generate for a dtlte relative', function (done) {
+          var out = qf.filter('value=__dtlte_-2hrs');
+          should.exist(out);
+          out.should.have.property('value');
+          out.value.should.have.property('$lte');
+          (out.value.$lte*1).should.be.approximately(new Date()*1 - (1000*60*60*2), 1000);
+          done();
+      });
+    test('should generate for a dtlte relative', function (done) {
+          var out = qf.filter('value=__dtlte_2hrs');
+          should.exist(out);
+          out.should.have.property('value');
+          out.value.should.have.property('$lte');
+          (out.value.$lte*1).should.be.approximately(new Date()*1 + (1000*60*60*2), 1000);
+          done();
+      });
+    test('should generate for a dtlte relative', function (done) {
+          var out = qf.filter('value=__dtlte_2days');
+          should.exist(out);
+          out.should.have.property('value');
+          out.value.should.have.property('$lte');
+          (out.value.$lte*1).should.be.approximately(new Date()*1 + (1000*60*60*48), 1000);
+          done();
+      });
+    test('should generate for a dtlte relative', function (done) {
+          var out = qf.filter('value=__dtlte_2weeks');
+          should.exist(out);
+          out.should.have.property('value');
+          out.value.should.have.property('$lte');
+          (out.value.$lte*1).should.be.approximately(new Date()*1 + (1000*60*60*24*14), 1000);
+          done();
+      });
+
+
 });
 
 suite('The filter values', function () {

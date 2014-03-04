@@ -77,6 +77,16 @@ Output:
 {value: {$or: ['alice', 'bob']}}
 ```
 
+### Existence
+```javascript
+var querystring = 'value=__exists_true';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+{value: {$exists: true}}
+```
+
 
 ### ElemMatch
 ```javascript
@@ -126,6 +136,24 @@ var result = require('mongo-queryfilter').filter(querystring);
 Output:
 ```javascript
 {$and: [{value: {$gt: 1}},{value: {$lt: 10}}]}
+```
+
+
+### Date Filtering
+
+You can filter based on both relative and absolute dates.
+There are the following date comparisons: dtgt,dtlt,dtgte,dtlte, dteq.
+You can pass an absolute value in ISO8601 format (e.g. 2014-01-01) or as a timestamp (1388534400000)
+
+Alternatively, you can pass a relative value e.g. "-2days" "4weeks", "1year"
+
+```javascript
+var querystring = 'value=__dtlte_2weeks';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+{$value: {$lte: *Date 2 weeks from now*}}
 ```
 
 

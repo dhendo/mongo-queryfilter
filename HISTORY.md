@@ -1,6 +1,11 @@
 History
 =======
 
+####2014-02-19 v0.0.7
+
+Add relative and absolute date filtering
+Add support for $exists operator
+
 ####2014-02-19 v0.0.6
 
 Add nin operator (MikeTheTechie)
