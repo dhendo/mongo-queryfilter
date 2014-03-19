@@ -1,6 +1,9 @@
 History
 =======
 
+####2014-03-19 v0.0.8
+Fix relative date filtering - was returning a timestamp rather than a date object
+
 ####2014-02-19 v0.0.7
 
 Add relative and absolute date filtering
