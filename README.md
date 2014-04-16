@@ -43,7 +43,6 @@ Output:
 {value: {$ne: "bob"}}
 ```
 
-
 ### Greater Than
 ```javascript
 var querystring = 'value=__gt_5;
@@ -156,6 +155,15 @@ Output:
 {$value: {$lte: *Date 2 weeks from now*}}
 ```
 
+### Boolean Values
+```javascript
+var querystring = 'value=__bool_true';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+{value: true}
+```
 
 
 

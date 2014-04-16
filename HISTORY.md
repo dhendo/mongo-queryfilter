@@ -1,6 +1,9 @@
 History
 =======
 
+####2014-04-16 v0.0.9
+Add in coercion to booleans with _bool.
+
 ####2014-03-19 v0.0.8
 Fix relative date filtering - was returning a timestamp rather than a date object
 

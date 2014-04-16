@@ -114,6 +114,37 @@ suite('The filter', function () {
         done();
     });
 
+    test('should generate for a bool true', function (done) {
+        var out = qf.filter('value=__bool_true');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.be.true;
+
+        done();
+    });
+    test('should generate for a bool false', function (done) {
+        var out = qf.filter('value=__bool_false');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.be.false;
+        done();
+    });
+    test('should generate for a bool 1', function (done) {
+        var out = qf.filter('value=__bool_1');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.be.true;
+
+        done();
+    });
+    test('should generate for a bool 0', function (done) {
+        var out = qf.filter('value=__bool_0');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.be.false;
+        done();
+    });
+
     test('should generate for a ne', function (done) {
         var out = qf.filter('value=__ne_5');
         should.exist(out);
@@ -134,6 +165,7 @@ suite('The filter', function () {
         should.exist(out);
         out.should.have.property('value');
         out.value.should.have.property('$exists', false);
+        out.value.$exists.should.be.false;
         done();
     });
 
@@ -142,6 +174,7 @@ suite('The filter', function () {
         should.exist(out);
         out.should.have.property('value');
         out.value.should.have.property('$exists', false);
+        out.value.$exists.should.be.false;
         done();
     });
 
@@ -150,6 +183,7 @@ suite('The filter', function () {
         should.exist(out);
         out.should.have.property('value');
         out.value.should.have.property('$exists', true);
+        out.value.$exists.should.be.true;
         done();
     });
 
