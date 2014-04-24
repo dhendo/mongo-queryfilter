@@ -1,6 +1,10 @@
 History
 =======
 
+####2014-04-24 v0.1.0
+Added sort function.
+Added testing on Travis.
+
 ####2014-04-16 v0.0.9
 Add in coercion to booleans with _bool.
 

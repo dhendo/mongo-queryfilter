@@ -167,5 +167,59 @@ Output:
 
 
 
+# Sorting
+
+The module can also handle the generation of the sorting parameter for you. Values of the "sort" parameter will be used from the querystring.
+A prefix can be used to avoid clashes.
+
+```javascript
+var querystring = 'sort=dt_-1';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+[[dt, -1]]
+```
+
+### Multiple Sorts
+
+Duplicate the sort parameter, in the order you wish the sort to occur in:
+
+```javascript
+var querystring = 'sort=dt_-1&sort=name_1';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+[["dt", -1], ["name", 1]]
+```
+### Asc / Dec
+
+"asc" and "desc" are also supported as values
+
+```javascript
+var querystring = 'sort=dt_desc&sort=name_asc';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+[["dt", -1], ["name", 1]]
+```
+### Prefixing
+
+A prefix can be specified
+
+```javascript
+var querystring = '__sort=dt_-1&__sort=name_1&sort=ignored_1';
+var result = require('mongo-queryfilter').filter(querystring, {"prefix": "__"});
+```
+Output:
+```javascript
+[["dt", -1], ["name", 1]]
+```
+
+
+
+
 
 
