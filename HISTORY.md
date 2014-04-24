@@ -1,6 +1,9 @@
 History
 =======
 
+####2014-04-24 v0.1.1
+Switched order separator from _ to __
+
 ####2014-04-24 v0.1.0
 Added sort function.
 Added testing on Travis.

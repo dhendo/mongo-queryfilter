@@ -1,6 +1,6 @@
 {
   "name": "mongo-queryfilter",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Safely create a simple mongo query from a querystring collection to allow filtering",
   "main": "index.js",
   "scripts": {
