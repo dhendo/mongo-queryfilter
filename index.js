@@ -27,7 +27,7 @@ function processQuerystringItem(key, value) {
 
 function processSortQuerystringItem(value) {
     var extractSort = function (val) {
-        var spl = val.split("_");
+        var spl = val.split("__");
 
         if(spl.length !== 2) {
             return null;

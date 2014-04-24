@@ -19,7 +19,7 @@ suite('The sorting function', function () {
     });
 
     test('should generate for a single sort', function (done) {
-        var out = qf.sort('sort=dt_-1');
+        var out = qf.sort('sort=dt__-1');
         should.exist(out);
         out.should.be.an.Array.and.have.length(1);
         out[0].should.be.an.Array.and.have.length(2);
@@ -29,7 +29,7 @@ suite('The sorting function', function () {
     });
 
     test('should generate for a double sort', function (done) {
-        var out = qf.sort('sort=dt_-1&sort=name_1');
+        var out = qf.sort('sort=dt__-1&sort=name__1');
         should.exist(out);
         out.should.be.an.Array.and.have.length(2);
         out[0].should.be.an.Array.and.have.length(2);
@@ -42,7 +42,7 @@ suite('The sorting function', function () {
         done();
     });
     test('should ignore bogus values', function (done) {
-        var out = qf.sort('sort=dt_-1&sort=name_1&sort=bad_something');
+        var out = qf.sort('sort=dt__-1&sort=name__1&sort=bad__something');
         should.exist(out);
         out.should.be.an.Array.and.have.length(2);
         out[0].should.be.an.Array.and.have.length(2);
@@ -55,7 +55,7 @@ suite('The sorting function', function () {
         done();
     });
     test('should support asc and desc', function (done) {
-        var out = qf.sort('sort=dt_desc&sort=name_asc');
+        var out = qf.sort('sort=dt__desc&sort=name__asc');
         should.exist(out);
         out.should.be.an.Array.and.have.length(2);
         out[0].should.be.an.Array.and.have.length(2);
@@ -68,7 +68,7 @@ suite('The sorting function', function () {
         done();
     });
     test('should support asc and desc non sensitive', function (done) {
-        var out = qf.sort('sort=dt_dESc&sort=name_ASc');
+        var out = qf.sort('sort=dt__dESc&sort=name__ASc');
         should.exist(out);
         out.should.be.an.Array.and.have.length(2);
         out[0].should.be.an.Array.and.have.length(2);
@@ -82,7 +82,7 @@ suite('The sorting function', function () {
     });
 
     test('should support any numbers', function (done) {
-        var out = qf.sort('sort=dt_-3.141&sort=name_4700000&other=0');
+        var out = qf.sort('sort=dt__-3.141&sort=name__4700000&other=0');
         should.exist(out);
         out.should.be.an.Array.and.have.length(2);
         out[0].should.be.an.Array.and.have.length(2);
@@ -96,7 +96,7 @@ suite('The sorting function', function () {
     });
 
     test('should support any numbers', function (done) {
-        var out = qf.sort('sort=dt_-3.141&sort=name_4700000&other=0');
+        var out = qf.sort('sort=dt__-3.141&sort=name__4700000&other=0');
         should.exist(out);
         out.should.be.an.Array.and.have.length(2);
         out[0].should.be.an.Array.and.have.length(2);
@@ -109,7 +109,7 @@ suite('The sorting function', function () {
         done();
     });
     test('should ignore bad values', function (done) {
-        var out = qf.sort('sort=-1&sort=name____&sort=');
+        var out = qf.sort('sort=-1&sort=name_____&sort=');
         should.not.exist(out);
         done();
     });
@@ -120,7 +120,7 @@ suite('The sorting function', function () {
     });
 
     test('should only allow prefixed items through', function (done) {
-        var out = qf.sort('__sort=dt_-1&__sort=name_1&sort=other_1', {prefix: "__"});
+        var out = qf.sort('__sort=dt__-1&__sort=name__1&sort=other__1', {prefix: "__"});
         should.exist(out);
         out.should.be.an.Array.and.have.length(2);
         out[0].should.be.an.Array.and.have.length(2);
