@@ -114,6 +114,13 @@ suite('The filter', function () {
         done();
     });
 
+    test('should generate for a streq', function (done) {
+        var out = qf.filter('value=__streq_000000007');
+        should.exist(out);
+        out.value.should.equal("000000007");
+        done();
+    });
+
     test('should generate for a bool true', function (done) {
         var out = qf.filter('value=__bool_true');
         should.exist(out);
@@ -378,6 +385,8 @@ suite('Date filtering', function () {
         (out.value*1).should.equal(new Date("2014-01-01") *1);
         done();
     });
+
+
 
 
 

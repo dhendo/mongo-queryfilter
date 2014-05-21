@@ -165,6 +165,16 @@ Output:
 {value: true}
 ```
 
+### Casting to a string
+Sometimes, it is desirable to not cast to a number (e.g. 0 prefixed numeric strings)
+```javascript
+var querystring = 'value=__streq_007';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+{value: "007"}
+```
 
 
 # Sorting
