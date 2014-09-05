@@ -176,6 +176,17 @@ Output:
 {value: "007"}
 ```
 
+The same can be done for $in and $nin:
+
+```javascript
+var querystring = 'value=__strin_007||008';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+{value: {$in: ['007', '008']}}
+```
+
 
 # Sorting
 

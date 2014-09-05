@@ -1,6 +1,9 @@
 History
 =======
 
+####2014-09-05 v0.1.3
+Added strin and strnin operators to avoid casting to a number (e.g. "007" does not get casted to 7) for in queries
+
 ####2014-04-21 v0.1.2
 Added streq operator to avoid casting to a number (e.g. "007" does not get casted to 7)
 

@@ -120,6 +120,22 @@ suite('The filter', function () {
         out.value.should.equal("000000007");
         done();
     });
+    test('should generate for a strin', function (done) {
+        var out = qf.filter('value=__strin_000000007||000000008');
+        should.exist(out);
+        out.value.should.have.property('$in');
+        out.value.$in.should.include('000000007');
+        out.value.$in.should.include('000000008');
+        done();
+    });
+    test('should generate for a strnin', function (done) {
+        var out = qf.filter('value=__strnin_000000007||000000008');
+        should.exist(out);
+        out.value.should.have.property('$nin');
+        out.value.$nin.should.include('000000007');
+        out.value.$nin.should.include('000000008');
+        done();
+    });
 
     test('should generate for a bool true', function (done) {
         var out = qf.filter('value=__bool_true');
