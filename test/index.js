@@ -332,6 +332,42 @@ suite('The filter', function () {
         out.$and[1].price.should.have.property('$thing', 4);
         done();
     });
+
+    test('should allow a new operator to be defined that replaces the fieldname', function (done) {
+        // define a function that returns an operator $thing, that doubles the value
+        var thingfn = function(value, helpers, operatorName){
+            return value * 2;
+        };
+        // Set for the lifetime of qf
+        qf.extendOperators({'thing': {'fn': thingfn, 'ns': '$thing', rename: function(fieldName, initialValue, self, op, o){
+            return fieldName + "bar";
+        }}});
+        var out = qf.filter('extra.color=red&price=__thing_2');
+        should.exist(out);
+        out.should.have.property('$and');
+        out.$and.should.have.length(2);
+        out.$and[0].should.have.property("extra.color", "red");
+        out.$and[1].should.have.property('pricebar');
+        out.$and[1].pricebar.should.have.property('$thing', 4);
+        done();
+    });
+
+    test('should allow a new operator to be defined that replaces the fieldname with a static value', function (done) {
+        // define a function that returns an operator $thing, that doubles the value
+        var thingfn = function(value, helpers, operatorName){
+            return value * 2;
+        };
+        // Set for the lifetime of qf
+        qf.extendOperators({'thing': {'fn': thingfn, 'ns': '$thing', rename: "foo"}});
+        var out = qf.filter('extra.color=red&price=__thing_2');
+        should.exist(out);
+        out.should.have.property('$and');
+        out.$and.should.have.length(2);
+        out.$and[0].should.have.property("extra.color", "red");
+        out.$and[1].should.have.property('foo');
+        out.$and[1].foo.should.have.property('$thing', 4);
+        done();
+    });
 });
 
 suite('Prefixing', function () {

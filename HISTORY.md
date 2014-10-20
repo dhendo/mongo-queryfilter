@@ -1,6 +1,9 @@
 History
 =======
 
+####2014-10-20 v0.1.4
+Allow custom operators to override the key of the field that is being operated on.
+
 ####2014-09-05 v0.1.3
 Added strin and strnin operators to avoid casting to a number (e.g. "007" does not get casted to 7) for in queries
 

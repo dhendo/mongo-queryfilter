@@ -1,24 +1,28 @@
 var qs = require('qs');
 var helpers = require('./lib/helpers');
 
-function processQuerystringItem(key, value) {
+function processQuerystringItem(fieldName, value) {
     var result;
     if(require("util").isArray(value)) {
         var processedValues = [];
         for(var i = 0; i < value.length; i++) {
-            var subValue = helpers.replace_operator_values(value[i]);
-            if(subValue) {
+            var subValue = helpers.replace_operator_values(value[i], fieldName);
+            if(subValue.value) {
                 result = {};
-                result[key] = subValue;
+                result[fieldName] = subValue.value;
                 processedValues.push(result);
             }
         }
         return processedValues;
     } else {
-        value = helpers.replace_operator_values(value);
-        if(value !== null) {
+        value = helpers.replace_operator_values(value, fieldName);
+        if(value.value !== null) {
             result = {};
-            result[key] = value;
+            if(value.rename) {
+                result[value.rename] = value.value;
+            } else {
+                result[fieldName] = value.value;
+            }
             return [result];
         }
     }
