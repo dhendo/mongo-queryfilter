@@ -10,7 +10,7 @@
   "author": "David Henderson",
   "license": "MIT",
   "dependencies": {
-    "qs": "~0.6.5"
+    "qs": "~1.2.1"
   },
   "devDependencies": {
     "mocha": "~1.18.2",
