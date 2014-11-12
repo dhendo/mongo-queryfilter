@@ -1,6 +1,9 @@
 History
 =======
 
+####2014-11-12 v0.1.5
+Allow custom operators to inline a $not to negate the section of the qyery
+
 ####2014-10-20 v0.1.4
 Allow custom operators to override the key of the field that is being operated on.
 

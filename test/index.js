@@ -368,6 +368,24 @@ suite('The filter', function () {
         out.$and[1].foo.should.have.property('$thing', 4);
         done();
     });
+
+    test('should allow a new operator to be defined that also negates', function (done) {
+        // define a function that returns an operator $thing, that doubles the value
+        var thingfn = function(value, helpers, operatorName){
+            return value * 2;
+        };
+        // Set for the lifetime of qf
+        qf.extendOperators({'thing': {'fn': thingfn, 'ns': '$thing', rename: "foo", negate: true}});
+        var out = qf.filter('extra.color=red&price=__thing_2');
+        should.exist(out);
+        out.should.have.property('$and');
+        out.$and.should.have.length(2);
+        out.$and[0].should.have.property("extra.color", "red");
+        out.$and[1].should.have.property('foo');
+        out.$and[1].foo.should.have.property('$not');
+        out.$and[1].foo.$not.should.have.property('$thing', 4);
+        done();
+    });
 });
 
 suite('Prefixing', function () {
