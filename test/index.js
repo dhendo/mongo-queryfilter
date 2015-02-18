@@ -45,6 +45,15 @@ suite('The filter', function () {
         out.value.$in.should.include('bob');
         done();
     });
+    test('should generate for an in with a plain object', function (done) {
+        var out = qf.filter({value: "__in_alice||bob"});
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$in');
+        out.value.$in.should.include('alice');
+        out.value.$in.should.include('bob');
+        done();
+    });
 
 
     test('should generate for an nin', function (done) {

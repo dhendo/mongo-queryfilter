@@ -100,10 +100,14 @@ module.exports = {
         var querystring;
         if(typeof request === 'string') {
             querystring = request;
-        } else if(typeof request === 'object' && request.url && request.url.query) {
-            querystring = request.url.query;
+        } else if(typeof request === 'object' && request) {
+            if(request.url && request.url.query) {
+                querystring = request.url.query;
+            }else{
+                querystring = request;
+            }
         } else {
-            throw new Error('The first parameter should be a request object, or a querystring');
+            throw new Error('The first parameter should be an object, a request object, or a querystring');
         }
 
         var qsParts = qs.parse(querystring);
