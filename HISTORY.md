@@ -1,8 +1,8 @@
 History
 =======
 
-####2014-11-12 v0.1.6
-Allow a raw object to be passed in
+####2014-11-12 [v0.1.6] v0.1.7
+Allow a raw object to be passed in. Flatten deep object properties.
 
 ####2014-11-12 v0.1.5
 Allow custom operators to inline a $not to negate the section of the query

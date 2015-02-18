@@ -82,6 +82,27 @@ function processSortQuerystringItem(value) {
     return null;
 }
 
+function flatten(request) {
+    var flattened = {};
+    var traverse = function (obj, path) {
+        var currentPath = '';
+        if(obj) {
+            for(var key in obj) {
+                if(obj.hasOwnProperty(key)) {
+                    currentPath = path ? path + "." + key : key;
+
+                    if(typeof obj[key] === 'object'){
+                        traverse(obj[key], currentPath);
+                    }else{
+                        flattened[currentPath] = obj[key];
+                    }
+                }
+            }
+        }
+    };
+    traverse(request, "")
+    return flattened;
+}
 module.exports = {
 
     extendOperators: function (operators) {
@@ -103,8 +124,8 @@ module.exports = {
         } else if(typeof request === 'object' && request) {
             if(request.url && request.url.query) {
                 querystring = request.url.query;
-            }else{
-                querystring = request;
+            } else {
+                querystring = flatten(request);
             }
         } else {
             throw new Error('The first parameter should be an object, a request object, or a querystring');
@@ -140,8 +161,7 @@ module.exports = {
         }
 
         return filterQuery;
-    },
-    sort: function (request, options) {
+    }, sort: function (request, options) {
         var sortQuery = [];
         options = options || {};
         var prefix = options.prefix;

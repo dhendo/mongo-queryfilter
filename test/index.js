@@ -54,6 +54,16 @@ suite('The filter', function () {
         out.value.$in.should.include('bob');
         done();
     });
+    test('should generate for an in with a nested object', function (done) {
+        var out = qf.filter({extra: {color:"red"}, price: "__gt_2"});
+        should.exist(out);
+        out.should.have.property('$and');
+        out.$and.should.have.length(2);
+        out.$and[0].should.have.property("extra.color", "red");
+        out.$and[1].should.have.property('price');
+        out.$and[1].price.should.have.property('$gt', 2);
+        done();
+    });
 
 
     test('should generate for an nin', function (done) {
