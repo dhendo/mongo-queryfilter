@@ -3,7 +3,7 @@ mongo-queryfilter
 
 Generate an object suitable for use as a a mongo query from a querystring or request object.
 
-The filter function takes either a node http request object or a string containing the "query" portion of the request (e.g. "param=foo&param2=bar"). Numeric values will be cast as appropriate.
+The filter function takes either a raw object, a node http request object or a string containing the "query" portion of the request (e.g. "param=foo&param2=bar"). Numeric values will be cast as appropriate.
 
 [![Build Status](https://travis-ci.org/dhendo/mongo-queryfilter.svg?branch=master)](https://travis-ci.org/dhendo/mongo-queryfilter)
 
