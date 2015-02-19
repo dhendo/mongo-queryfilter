@@ -1,7 +1,10 @@
 History
 =======
 
-####2014-11-12 [v0.1.6] v0.1.7
+####2015-02-19 v0.1.8
+Bugfix to allow raw objects to pass in arrays / numbers correctly
+
+####2015-02-18 [v0.1.6] v0.1.7
 Allow a raw object to be passed in. Flatten deep object properties.
 
 ####2014-11-12 v0.1.5

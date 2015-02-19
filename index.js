@@ -91,7 +91,7 @@ function flatten(request) {
                 if(obj.hasOwnProperty(key)) {
                     currentPath = path ? path + "." + key : key;
 
-                    if(typeof obj[key] === 'object'){
+                    if(typeof obj[key] === 'object' && !require("util").isArray(obj[key])){
                         traverse(obj[key], currentPath);
                     }else{
                         flattened[currentPath] = obj[key];

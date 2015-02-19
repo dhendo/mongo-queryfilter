@@ -54,7 +54,7 @@ suite('The filter', function () {
         out.value.$in.should.include('bob');
         done();
     });
-    test('should generate for an in with a nested object', function (done) {
+    test('should generate for a nested object', function (done) {
         var out = qf.filter({extra: {color:"red"}, price: "__gt_2"});
         should.exist(out);
         out.should.have.property('$and');
@@ -62,6 +62,24 @@ suite('The filter', function () {
         out.$and[0].should.have.property("extra.color", "red");
         out.$and[1].should.have.property('price');
         out.$and[1].price.should.have.property('$gt', 2);
+        done();
+    });
+    test('should generate for a nested object that includes an array', function (done) {
+        var out = qf.filter({extra: {color:"red"}, other: [7,8], price: "__gt_2"});
+        should.exist(out);
+        out.should.have.property('$and');
+        out.$and.should.have.length(4);
+        out.$and[0].should.have.property("extra.color", "red");
+        out.$and[1].should.have.property('other', 7);
+        out.$and[2].should.have.property('other', 8);
+        out.$and[3].should.have.property('price');
+        out.$and[3].price.should.have.property('$gt', 2);
+        done();
+    });
+    test('should generate for a plain object that contains non-string values', function (done) {
+        var out = qf.filter({price: 2});
+        should.exist(out);
+        out.should.have.property("price", 2);
         done();
     });
 
