@@ -118,20 +118,20 @@ module.exports = {
             helpers.extendOperators(options.operators);
         }
 
-        var querystring;
+        var querystring, qsParts
         if(typeof request === 'string') {
             querystring = request;
+            qsParts = qs.parse(querystring);
         } else if(typeof request === 'object' && request) {
             if(request.url && request.url.query) {
                 querystring = request.url.query;
+                qsParts = qs.parse(querystring);
             } else {
-                querystring = flatten(request);
+                qsParts = flatten(request);
             }
         } else {
             throw new Error('The first parameter should be an object, a request object, or a querystring');
         }
-
-        var qsParts = qs.parse(querystring);
 
         var conditions = [];
         var condition;
