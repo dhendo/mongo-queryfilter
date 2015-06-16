@@ -1,6 +1,9 @@
 History
 =======
 
+####2015-06-16 [v0.1.10] v0.1.10
+Add support for $all
+
 ####2015-02-19 [v0.1.8] v0.1.9
 Bugfixes to allow raw objects to pass in arrays / numbers correctly
 

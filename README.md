@@ -64,6 +64,16 @@ var result = require('mongo-queryfilter').filter(querystring);
 Output:
 ```javascript
 {value: {$in: ['alice', 'bob']}}
+
+
+### All
+```javascript
+var querystring = 'value=__all_alice||bob';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+{value: {$all: ['alice', 'bob']}}
 ```
 
 ### Or

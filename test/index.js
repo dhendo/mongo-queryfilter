@@ -45,6 +45,16 @@ suite('The filter', function () {
         out.value.$in.should.include('bob');
         done();
     });
+
+    test('should generate for an all', function (done) {
+        var out = qf.filter({url: {query: {value: "__all_alice||bob"}}});
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$all');
+        out.value.$all.should.include('alice');
+        out.value.$all.should.include('bob');
+        done();
+    });
     test('should generate for an in with a plain object', function (done) {
         var out = qf.filter({value: "__in_alice||bob"});
         should.exist(out);
@@ -403,6 +413,22 @@ suite('The filter', function () {
         out.$and[0].should.have.property("extra.color", "red");
         out.$and[1].should.have.property('foo');
         out.$and[1].foo.should.have.property('$thing', 4);
+        done();
+    });
+
+    test('should allow a new operator', function (done) {
+        // define a function that returns an operator $thing, that doubles the value
+        var thingfn = function(value, helpers, operatorName){
+            return value.split("||");
+        };
+        // Set for the lifetime of qf
+        qf.extendOperators({'catin': {'fn': thingfn, 'ns': "$in", rename: "cat"}});
+        var out = qf.filter('cat=__catin_computer-hardware||peripherals');
+        should.exist(out);
+        out.should.have.property('cat');
+        out.cat.should.have.property("$in");
+        out.cat.$in.should.containEql("computer-hardware");
+        out.cat.$in.should.containEql("peripherals");
         done();
     });
 
