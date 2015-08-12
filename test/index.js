@@ -347,7 +347,7 @@ suite('The filter', function () {
     test('should allow a new operator to be defined', function (done) {
 
         // define a function that returns an operator $thing, that doubles the value
-        var thingfn = function(value, helpers, operatorName){
+        var thingfn = function(value, helpers, operatorName, fieldName){
             return value * 2;  // You can call helpers.replace_operator_values to recursively generate fragments.
         };
 
@@ -365,7 +365,7 @@ suite('The filter', function () {
     test('should allow a new operator to be defined beforehand', function (done) {
 
         // define a function that returns an operator $thing, that doubles the value
-        var thingfn = function(value, helpers, operatorName){
+        var thingfn = function(value, helpers, operatorName, fieldName){
             return value * 2;
         };
         // Set for the lifetime of qf
@@ -382,7 +382,7 @@ suite('The filter', function () {
 
     test('should allow a new operator to be defined that replaces the fieldname', function (done) {
         // define a function that returns an operator $thing, that doubles the value
-        var thingfn = function(value, helpers, operatorName){
+        var thingfn = function(value, helpers, operatorName, fieldName){
             return value * 2;
         };
         // Set for the lifetime of qf
@@ -401,7 +401,7 @@ suite('The filter', function () {
 
     test('should allow a new operator to be defined that replaces the fieldname with a static value', function (done) {
         // define a function that returns an operator $thing, that doubles the value
-        var thingfn = function(value, helpers, operatorName){
+        var thingfn = function(value, helpers, operatorName, fieldName){
             return value * 2;
         };
         // Set for the lifetime of qf
@@ -418,7 +418,7 @@ suite('The filter', function () {
 
     test('should allow a new operator', function (done) {
         // define a function that returns an operator $thing, that doubles the value
-        var thingfn = function(value, helpers, operatorName){
+        var thingfn = function(value, helpers, operatorName, fieldName){
             return value.split("||");
         };
         // Set for the lifetime of qf
@@ -434,7 +434,7 @@ suite('The filter', function () {
 
     test('should allow a new operator to be defined that also negates', function (done) {
         // define a function that returns an operator $thing, that doubles the value
-        var thingfn = function(value, helpers, operatorName){
+        var thingfn = function(value, helpers, operatorName, fieldName){
             return value * 2;
         };
         // Set for the lifetime of qf
