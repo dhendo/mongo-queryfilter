@@ -1,6 +1,12 @@
 History
 =======
 
+####2015-09-25 [v0.1.12] v0.1.12
+Disallow nulls for certain operators @jake314159
+
+####2015-08-12 [v0.1.11] v0.1.11
+Pass fieldname to operator function @jake314159
+
 ####2015-06-16 [v0.1.10] v0.1.10
 Add support for $all
 
