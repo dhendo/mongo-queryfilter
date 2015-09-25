@@ -449,6 +449,42 @@ suite('The filter', function () {
         out.$and[1].foo.$not.should.have.property('$thing', 4);
         done();
     });
+
+    var notNullable = ["$elemmatch", "$lt", "$lte", "$gt", "$gte", "$in", "$nin"];
+    for(i in notNullable) {
+        test('should not allow '+notNullable[i]+' to have a value of null', function (done) {
+            var nullfn = function (value, helpers, operatorName, fieldName) {
+                return null;
+            };
+            // Set for the lifetime of qf
+            qf.extendOperators({'thing': {'fn': nullfn, 'ns': notNullable[i]}});
+            var out = qf.filter('extra.color=red&price=__thing_2');
+
+            should.exist(out);
+            out.should.have.property("extra.color", "red");
+            out.should.not.have.property('price');
+            done();
+        });
+    }
+
+    var isNullable = ["$eq", "$neq"];
+    for(i in isNullable) {
+        test('should allow '+isNullable[i]+' to have a value of null', function (done) {
+            var thingfn = function(value, helpers, operatorName, fieldName) {
+                return null;
+            };
+            // Set for the lifetime of qf
+            qf.extendOperators({'thing': {'fn': thingfn, 'ns': isNullable[i]}});
+            var out = qf.filter('extra.color=red&price=__thing_2');
+            should.exist(out);
+            out.should.have.property('$and');
+            out.$and.should.have.length(2);
+            out.$and[0].should.have.property("extra.color", "red");
+            out.$and[1].should.have.property('price');
+            out.$and[1].price.should.have.property(isNullable[i], null);
+            done();
+        });
+    }
 });
 
 suite('Prefixing', function () {
