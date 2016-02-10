@@ -9,7 +9,11 @@ function processQuerystringItem(fieldName, value) {
             var subValue = helpers.replace_operator_values(value[i], fieldName);
             if(subValue.value) {
                 result = {};
-                result[fieldName] = subValue.value;
+                if(subValue.rename) {
+                    result[subValue.rename] = subValue.value;
+                } else {
+                    result[fieldName] = subValue.value;
+                }
                 processedValues.push(result);
             }
         }
