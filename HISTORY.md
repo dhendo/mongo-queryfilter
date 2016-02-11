@@ -1,19 +1,25 @@
 History
 =======
 
-####2015-09-25 [v0.1.12] v0.1.12
+####2016-02-11 v0.1.14
+Apply rename when using multiple filters @jake314159
+
+####2015-10-26 v0.1.13
+Bumped qsversion @dhendo
+
+####2015-09-25 v0.1.12
 Disallow nulls for certain operators @jake314159
 
-####2015-08-12 [v0.1.11] v0.1.11
+####2015-08-12 v0.1.11
 Pass fieldname to operator function @jake314159
 
-####2015-06-16 [v0.1.10] v0.1.10
+####2015-06-16 v0.1.10
 Add support for $all
 
-####2015-02-19 [v0.1.8] v0.1.9
+####2015-02-19 v0.1.9
 Bugfixes to allow raw objects to pass in arrays / numbers correctly
 
-####2015-02-18 [v0.1.6] v0.1.7
+####2015-02-18 v0.1.7
 Allow a raw object to be passed in. Flatten deep object properties.
 
 ####2014-11-12 v0.1.5
