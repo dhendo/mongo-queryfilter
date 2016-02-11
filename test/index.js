@@ -416,6 +416,23 @@ suite('The filter', function () {
         done();
     });
 
+    test('should allow a new operator that replaces the fieldname when there are multiple filters on the same field', function (done) {
+        // define a function that returns an operator $thing, that doubles the value
+        var thingfn = function(value, helpers, operatorName){
+            return value * 2;
+        };
+        // Set for the lifetime of qf
+        qf.extendOperators({'thing': {'fn': thingfn, 'ns': '$thing', rename: "foo"}});
+        var out = qf.filter('price=3&price=__thing_2');
+        should.exist(out);
+        out.should.have.property('$and');
+        out.$and.should.have.length(2);
+        out.$and[0].should.have.property("price", "3");
+        out.$and[1].should.have.property('foo');
+        out.$and[1].foo.should.have.property('$thing', 4);
+        done();
+    });
+
     test('should allow a new operator', function (done) {
         // define a function that returns an operator $thing, that doubles the value
         var thingfn = function(value, helpers, operatorName, fieldName){
