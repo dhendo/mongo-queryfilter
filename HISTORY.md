@@ -1,6 +1,9 @@
 History
 =======
 
+####2016-11-18 v0.1.15
+Allow extended operators to specify their own clean function @jake314159
+
 ####2016-02-11 v0.1.14
 Apply rename when using multiple filters @jake314159
 
