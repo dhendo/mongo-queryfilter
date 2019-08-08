@@ -1,6 +1,9 @@
 History
 =======
 
+####2019-08-08 v0.1.16
+Add "range" and "nrange" operators @jake314159
+
 ####2016-11-18 v0.1.15
 Allow extended operators to specify their own clean function @jake314159
 
