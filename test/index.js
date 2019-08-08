@@ -502,6 +502,29 @@ suite('The filter', function () {
             done();
         });
     }
+
+    test('should generate a range query', function (done) {
+        var out = qf.filter('value=__range_10_20.5');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$gte');
+        out.value.should.have.property('$lt');
+        out.value.$gte.should.equal(10);
+        out.value.$lt.should.equal(20.5);
+        done();
+    });
+
+    test('should generate a not in range query', function (done) {
+        var out = qf.filter('value=__nrange_10_20.5');
+        should.exist(out);
+        out.should.have.property('value');
+        out.value.should.have.property('$not');
+        out.value.$not.should.have.property('$gte');
+        out.value.$not.should.have.property('$lt');
+        out.value.$not.$gte.should.equal(10);
+        out.value.$not.$lt.should.equal(20.5);
+        done();
+    });
 });
 
 suite('Prefixing', function () {

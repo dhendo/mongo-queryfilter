@@ -117,6 +117,31 @@ Output:
 {array: {$elemMatch: {id: {$in: ['a', 'b']}, bob: {$gt: 1}]}}
 ```
 
+### Range
+
+Filters for values between two numbers.
+
+```javascript
+var querystring = 'value="__range_10_20';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+{value: {$gte: 10, $lt: 20}}
+```
+
+### Not in Range
+
+Filters for values *not* between two numbers.
+
+```javascript
+var querystring = 'value="__nrange_10_20';
+var result = require('mongo-queryfilter').filter(querystring);
+```
+Output:
+```javascript
+{value: {$not: {$gte: 10, $lt: 20}}}
+```
 
 ### Define new operators
 ```javascript
