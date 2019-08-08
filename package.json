@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node ./node_modules/mocha/bin/mocha"
   },
-  { "engines" : { "node" : ">=10.0.0" } }
+  "engines" : { "node" : ">=10.0.0" },
   "repository": "https://github.com/dhendo/mongo-queryfilter",
   "author": "David Henderson",
   "license": "MIT",
