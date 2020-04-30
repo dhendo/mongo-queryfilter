@@ -11,7 +11,7 @@
   "author": "David Henderson",
   "license": "MIT",
   "dependencies": {
-    "qs": "^5.2.0"
+    "qs": "^6.9.3"
   },
   "devDependencies": {
     "mocha": "~1.18.2",
