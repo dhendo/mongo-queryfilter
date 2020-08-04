@@ -1,6 +1,9 @@
 History
 =======
 
+####2020-08-04 v0.1.18
+Allow operators to request to be returned without a namespace. useful for e.g. $text @dhendo
+
 ####2019-08-08 v0.1.16
 Add "range" and "nrange" operators @jake314159
 
