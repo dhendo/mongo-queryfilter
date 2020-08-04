@@ -1,6 +1,9 @@
 History
 =======
 
+####2020-08-04 v0.1.19
+Dependabot upgrade of qs @dhendo
+
 ####2020-08-04 v0.1.18
 Allow operators to request to be returned without a namespace. useful for e.g. $text @dhendo
 
