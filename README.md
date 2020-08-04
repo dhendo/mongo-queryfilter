@@ -150,7 +150,7 @@ var thingfn = function(value, helpers, operatorName, fieldName){
     return value * 2;
 };
 
-var result = require('mongo-queryfilter').filter('extra.color=red&price=__thing_2', {operators: {'thing': {'fn': thingfn, 'ns': '$thing'}}});
+var result = require('mongo-queryfilter').filter('extra.color=red&price=__thing_2', {operators: {'thing': {'fn': thingfn, 'ns': '$thing', "rawvalue": false}}});
 ```
 Output:
 ```javascript
