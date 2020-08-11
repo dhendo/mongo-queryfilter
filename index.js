@@ -156,7 +156,11 @@ module.exports = {
         // Now build the final object
         switch(conditions.length) {
             case 1:
-                filterQuery = conditions[0];
+                if(options.forceand){
+                    filterQuery.$and = conditions;
+                }else{
+                    filterQuery = conditions[0];
+                }
                 break;
             case 0:
                 break;

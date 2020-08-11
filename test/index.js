@@ -709,6 +709,18 @@ suite('Date filtering', function () {
           (out.value.$lte*1).should.be.approximately(new Date()*1, 1000);
           done();
       });
+
+
+    test('should allow the result to always be returned as a $and', function (done) {
+        // define a function that returns an operator $thing, that doubles the value
+        // Set for the lifetime of qf
+        var out = qf.filter('price=3', {forceand: true});
+        should.exist(out);
+        out.should.have.property('$and');
+        out.$and.should.have.length(1);
+        out.$and[0].should.have.property("price", "3");
+        done();
+    });
 });
 
 suite('The filter values', function () {

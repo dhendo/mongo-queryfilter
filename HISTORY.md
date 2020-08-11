@@ -1,6 +1,9 @@
 History
 =======
 
+####2020-08-04 v0.1.20
+Allow the result to be returned in the $and form even if there is only one condition by passing {forceand: true} in the options @dhendo
+
 ####2020-08-04 v0.1.19
 Dependabot upgrade of qs @dhendo
 
